@@ -15,7 +15,15 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential libtool meson ninja-build pkg-config libcapstone-dev device-tree-compiler libglib2.0-dev gnutls-bin libjpeg-turbo8-dev libpng-dev libslirp-dev libssh-dev libusb-1.0-0-dev liblzo2-dev libncurses5-dev libpixman-1-dev libsnappy-dev vde2 zstd libgnutls28-dev libgmp10 libgmp3-dev lzfse liblzfse-dev
+          sudo apt-get install -y cmake build-essential libtool meson ninja-build pkg-config libcapstone-dev device-tree-compiler libglib2.0-dev gnutls-bin libjpeg-turbo8-dev libpng-dev libslirp-dev libssh-dev libusb-1.0-0-dev liblzo2-dev libncurses5-dev libpixman-1-dev libsnappy-dev vde2 zstd libgnutls28-dev libgmp10 libgmp3-dev 
+      - name: Build lzfse & liblzfse-dev
+        run: |
+          git clone https://github.com/lzfse/lzfse.git
+          cd lzfse
+          mkdir build
+          cd build
+          cmake ..
+          sudo make install
       - name: Build nettle 3.10.1
         run: |
           wget https://ftp.gnu.org/gnu/nettle/nettle-3.10.1.tar.gz
